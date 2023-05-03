@@ -18,11 +18,13 @@ You are working for a new-age insurance company and employ mutiple outreach plan
 8. dur: last contact duration, in seconds (numeric)
 9. num_calls: number of contacts performed during this campaign and for this client 
 10. prev_outcome: outcome of the previous marketing campaign (categorical: "unknown","other","failure","success")
-**Output variable (desired target):**
+# **Output variable (desired target):**
 y - has the client subscribed to the insurance?
 
 
 # **Minimum Requirements**
 It is not sufficient to just fit a model - the model must be analysed to find the important factors that contribute towards the conversion rate. AUROC must be used as a metric to evaluate the performance of the models. 
         
-   
+# Explanation
+This was the problem given to me as part of my final project in the Master Data Science course by GUVI.
+
