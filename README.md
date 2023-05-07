@@ -1,6 +1,6 @@
 # Customer-Conversion-Prediction-for-a-new-age-Insurance-Company
 A ML model to predict whether the clients will subscribe to insurance or not.
-                              # **Guvi Datathon 1.0**
+                                                     # Guvi Datathon 1.0
 # Customer Conversion Prediction
 
 # **Problem Statement**
@@ -28,3 +28,11 @@ It is not sufficient to just fit a model - the model must be analysed to find th
 # Explanation
 This was the problem given to me as part of my final project in the Master Data Science course by GUVI.
 
+The data was loaded and preprocessed - cleaned.
+
+* Data Visualization was done and Exploratory Data Analyis was done to take some meaningful insights.
+* It was a highly imbalanced data with less than 13% of the data in the subscribed category.
+* Data was balanced using SMOTE and Combined balancing techniques.
+* Data was fitted in Logistic regression. The AUROC score was good. But the domain side of the data needed a decent F1 score to build a reliable model.
+* Comparison and tuning of the models was done uisng Pycaret.
+* Feature importances were analysed.
