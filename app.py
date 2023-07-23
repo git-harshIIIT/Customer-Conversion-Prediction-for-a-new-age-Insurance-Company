@@ -1,11 +1,11 @@
 
 import streamlit as st
 import pandas as pd
-import joblib
+import pickle
 from sklearn.preprocessing import LabelEncoder
 
 # Load the trained model
-model = joblib.load('model.pkl')
+model = pickle.load('model.pkl')
 
 # Function to map categorical features back to their original values
 def map_back(column, mapping):
