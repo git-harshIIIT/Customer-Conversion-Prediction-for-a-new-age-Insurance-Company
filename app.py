@@ -41,6 +41,9 @@ st.markdown(
         font-weight: bold;
         margin-top: 1rem;
     }
+    .input-container {
+        margin-bottom: 1rem;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -73,15 +76,25 @@ def main():
     # Inverse transform function to map numeric values back to job names
     def inverse_transform_job(code):
         return le.inverse_transform([code])[0]
-        
+
     # Get user inputs for features
     st.subheader('Enter the Customer Details:')
-    job = st.selectbox('Job', dataset['job'].unique(), format_func=inverse_transform_job)
-    marital = st.selectbox('Marital Status', dataset['marital'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['marital'])[0])
-    education_qual = st.selectbox('Education Qualification', dataset['education_qual'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['education_qual'])[0])
-    call_type = st.selectbox('Call Type', dataset['call_type'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['call_type'])[0])
-    prev_outcome = st.selectbox('Previous Outcome', dataset['prev_outcome'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['prev_outcome'])[0])
-    mon = st.selectbox('Month', dataset['mon'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['mon'])[0])
+    col1, col2, col3 = st.beta_columns(3)
+    with col1:
+        job = st.selectbox('Job', dataset['job'].unique(), format_func=inverse_transform_job)
+    with col2:
+        marital = st.selectbox('Marital Status', dataset['marital'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['marital'])[0])
+    with col3:
+        education_qual = st.selectbox('Education Qualification', dataset['education_qual'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['education_qual'])[0])
+
+    col4, col5, col6 = st.beta_columns(3)
+    with col4:
+        call_type = st.selectbox('Call Type', dataset['call_type'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['call_type'])[0])
+    with col5:
+        prev_outcome = st.selectbox('Previous Outcome', dataset['prev_outcome'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['prev_outcome'])[0])
+    with col6:
+        mon = st.selectbox('Month', dataset['mon'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['mon'])[0])
+
     age = st.slider('Age', min_value=0, max_value=100, value=30)
     day = st.slider('Day', min_value=1, max_value=31, value=1)
     dur = st.slider('Duration ', min_value=0, max_value=1000, value=200)
