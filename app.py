@@ -79,7 +79,7 @@ def main():
 
     # Get user inputs for features
     st.subheader('Enter the Customer Details:')
-    col1, col2, col3 = st.beta_columns(3)
+    col1, col2, col3 = st.columns(3)
     with col1:
         job = st.selectbox('Job', dataset['job'].unique(), format_func=inverse_transform_job)
     with col2:
@@ -87,7 +87,7 @@ def main():
     with col3:
         education_qual = st.selectbox('Education Qualification', dataset['education_qual'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['education_qual'])[0])
 
-    col4, col5, col6 = st.beta_columns(3)
+    col4, col5, col6 = st.columns(3)
     with col4:
         call_type = st.selectbox('Call Type', dataset['call_type'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['call_type'])[0])
     with col5:
