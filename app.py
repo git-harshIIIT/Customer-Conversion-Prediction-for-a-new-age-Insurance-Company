@@ -1,4 +1,3 @@
-
 import streamlit as st
 import pandas as pd
 import joblib
@@ -37,10 +36,14 @@ def main():
     # Encode 'job' feature using LabelEncoder
     le = LabelEncoder()
     dataset['job'] = le.fit_transform(dataset['job'])
+    
+    # Inverse transform function to map numeric values back to job names
+    def inverse_transform_job(code):
+        return le.inverse_transform([code])[0]
 
     # Get user inputs for features
     st.subheader('Enter the Customer Details:')
-    job = st.selectbox('Job', dataset['job'].unique(), format_func=lambda x: map_back(pd.Series([x]), le.classes_)[0])
+    job = st.selectbox('Job', dataset['job'].unique(), format_func=inverse_transform_job)
     marital = st.selectbox('Marital Status', dataset['marital'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['marital'])[0])
     education_qual = st.selectbox('Education Qualification', dataset['education_qual'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['education_qual'])[0])
     call_type = st.selectbox('Call Type', dataset['call_type'].unique(), format_func=lambda x: map_back(pd.Series([x]), mapping['call_type'])[0])
@@ -51,29 +54,34 @@ def main():
     dur = st.slider('Duration', min_value=0, max_value=1000, value=200)
     num_calls = st.slider('Number of Calls', min_value=0, max_value=20, value=5)
 
-    # Prepare the input data for prediction
-    data = pd.DataFrame({
-        'job': [job],
-        'marital': [marital],
-        'education_qual': [education_qual],
-        'call_type': [call_type],
-        'prev_outcome': [prev_outcome],
-        'mon': [mon],
-        'age': [age],
-        'day': [day],
-        'dur': [dur],
-        'num_calls': [num_calls]
-    })
+    # Add a "Predict" button
+    predict_button = st.button('Predict')
 
-    # Make prediction using the loaded model
-    prediction = model.predict(data)[0]
+    # Make prediction when the "Predict" button is pressed
+    if predict_button:
+        # Prepare the input data for prediction
+        data = pd.DataFrame({
+            'job': [job],
+            'marital': [marital],
+            'education_qual': [education_qual],
+            'call_type': [call_type],
+            'prev_outcome': [prev_outcome],
+            'mon': [mon],
+            'age': [age],
+            'day': [day],
+            'dur': [dur],
+            'num_calls': [num_calls]
+        })
 
-    # Display the prediction
-    st.subheader('Prediction:')
-    if prediction == 0:
-        st.write('The customer will not subscribe to the insurance.')
-    else:
-        st.write('The customer will subscribe to the insurance.')
+        # Make prediction using the loaded model
+        prediction = model.predict(data)[0]
+
+        # Display the prediction
+        st.subheader('Prediction:')
+        if prediction == 0:
+            st.write('No, The customer will not subscribe to the insurance.')
+        else:
+            st.write('Yes, The customer will subscribe to the insurance.')
 
 # Run the app
 if __name__ == '__main__':
