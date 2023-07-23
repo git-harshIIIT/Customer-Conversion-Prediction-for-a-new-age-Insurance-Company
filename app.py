@@ -21,28 +21,55 @@ st.markdown(
     .header {
         background-color: #33adff;
         color: white;
-        padding: 0.5rem;
+        padding: 0.8rem;
         text-align: center;
-        font-size: 2rem;
+        font-size: 2.5rem;
         border-radius: 0.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     .button {
         background-color: #33adff;
         color: white;
-        padding: 0.5rem 1rem;
-        font-size: 1rem;
+        padding: 1rem 1.5rem;
+        font-size: 1.2rem;
         border: none;
         border-radius: 0.5rem;
         cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     .prediction {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         font-weight: bold;
-        margin-top: 1rem;
+        margin-top: 1.5rem;
+        text-align: center;
+        
     }
-    .input-container {
+    .footer {
+        margin-top: 2rem;
+        text-align: center;
+    }
+    .branding {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+    
+    .sidebar-content {
+        padding: 2rem;
+    }
+    .sidebar-header {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #33adff;
         margin-bottom: 1rem;
+    }
+    .sidebar-link {
+        font-size: 1.2rem;
+        color: #33adff;
+        text-decoration: none;
+    }
+    .sidebar-link:hover {
+        text-decoration: underline;
     }
     </style>
     """,
@@ -52,7 +79,13 @@ st.markdown(
 # Streamlit app
 def main():
     st.title('Customer Insurance Subscription Prediction')
-    st.markdown('<p class="header">Customer Details</p>', unsafe_allow_html=True)
+    st.markdown('<p class="header">Prediction Tool</p>', unsafe_allow_html=True)
+
+    # Sidebar menu
+    st.sidebar.title('Navigation')
+    st.sidebar.markdown('<p class="sidebar-header">Links</p>', unsafe_allow_html=True)
+    st.sidebar.markdown('[LinkedIn Profile](https://www.linkedin.com/farooq-basha)', unsafe_allow_html=True)
+
 
     # Read the dataset
     dataset = pd.read_csv('train.csv')
@@ -76,9 +109,9 @@ def main():
     # Inverse transform function to map numeric values back to job names
     def inverse_transform_job(code):
         return le.inverse_transform([code])[0]
-
+        
     # Get user inputs for features
-    st.subheader('Enter the Customer Details:')
+    st.markdown('<p class="header">Customer Details</p>', unsafe_allow_html=True)
     col1, col2, col3 = st.columns(3)
     with col1:
         job = st.selectbox('Job', dataset['job'].unique(), format_func=inverse_transform_job)
@@ -97,7 +130,7 @@ def main():
 
     age = st.slider('Age', min_value=0, max_value=100, value=30)
     day = st.slider('Day', min_value=1, max_value=31, value=1)
-    dur = st.slider('Duration ', min_value=0, max_value=1000, value=200)
+    dur = st.slider('Duration (Seconds)', min_value=0, max_value=1000, value=200)
     num_calls = st.slider('Number of Calls', min_value=0, max_value=20, value=5)
 
     # Add a "Predict" button
@@ -127,6 +160,10 @@ def main():
         else:
             st.markdown('<p class="prediction" style="color: green;">Yes, The customer is highly likely to subscribe to the insurance.</p>', unsafe_allow_html=True)
 
+    # Add branding and footer
+    st.markdown('<p class="footer">The Model is developed and designed by <span class="branding">Mohammed Farooq Basha S</span></p>', unsafe_allow_html=True)
+
 # Run the app
 if __name__ == '__main__':
     main()
+
