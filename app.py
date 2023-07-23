@@ -55,7 +55,6 @@ def main():
     dataset = pd.read_csv('train.csv')
     dataset = dataset.dropna(axis=0)
 
-
     # Map categorical features to numeric values
     mapping = {
         'y': {'no': 0, 'yes': 1},
@@ -74,6 +73,7 @@ def main():
     # Inverse transform function to map numeric values back to job names
     def inverse_transform_job(code):
         return le.inverse_transform([code])[0]
+        
     # Get user inputs for features
     st.subheader('Enter the Customer Details:')
     job = st.selectbox('Job', dataset['job'].unique(), format_func=inverse_transform_job)
@@ -86,7 +86,7 @@ def main():
     day = st.slider('Day', min_value=1, max_value=31, value=1)
     dur = st.slider('Duration ', min_value=0, max_value=1000, value=200)
     num_calls = st.slider('Number of Calls', min_value=0, max_value=20, value=5)
-    
+
     # Add a "Predict" button
     if st.button('Predict', key='predict_button'):
         # Prepare the input data for prediction
@@ -106,12 +106,13 @@ def main():
         # Make prediction using the loaded model
         prediction = model.predict(data)[0]
 
+        st.markdown('<p class="header">Prediction</p>', unsafe_allow_html=True)
+
         # Display the prediction
-        st.markdown('<p class="prediction">Prediction:</p>', unsafe_allow_html=True)
         if prediction == 0:
-            st.write('No, The customer is highly unlikely to subscribe to the insurance.')
+            st.markdown('<p class="prediction" style="color: red;">No, The customer is highly unlikely to subscribe to the insurance.</p>', unsafe_allow_html=True)
         else:
-            st.write('Yes, The customer is highly likely to subscribe to the insurance.')
+            st.markdown('<p class="prediction" style="color: green;">Yes, The customer is highly likely to subscribe to the insurance.</p>', unsafe_allow_html=True)
 
 # Run the app
 if __name__ == '__main__':
