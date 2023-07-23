@@ -46,7 +46,6 @@ st.markdown(
         
     }
     .footer {
-        margin-top: 2rem;
         text-align: center;
     }
     .branding {
@@ -79,13 +78,11 @@ st.markdown(
 # Streamlit app
 def main():
     st.title('Customer Insurance Subscription Prediction')
-    st.markdown('<p class="header">Prediction Tool</p>', unsafe_allow_html=True)
 
     # Sidebar menu
     st.sidebar.title('Navigation')
-    st.sidebar.markdown('<p class="sidebar-header">Links</p>', unsafe_allow_html=True)
+    st.sidebar.markdown('<p class="sidebar-header">Check out my</p>', unsafe_allow_html=True)
     st.sidebar.markdown('[LinkedIn Profile](https://www.linkedin.com/farooq-basha)', unsafe_allow_html=True)
-
 
     # Read the dataset
     dataset = pd.read_csv('train.csv')
@@ -111,7 +108,7 @@ def main():
         return le.inverse_transform([code])[0]
         
     # Get user inputs for features
-    st.markdown('<p class="header">Customer Details</p>', unsafe_allow_html=True)
+ 
     col1, col2, col3 = st.columns(3)
     with col1:
         job = st.selectbox('Job', dataset['job'].unique(), format_func=inverse_transform_job)
@@ -160,10 +157,9 @@ def main():
         else:
             st.markdown('<p class="prediction" style="color: green;">Yes, The customer is highly likely to subscribe to the insurance.</p>', unsafe_allow_html=True)
 
-    # Add branding and footer
-    st.markdown('<p class="footer">The Model is developed and designed by <span class="branding">Mohammed Farooq Basha S</span></p>', unsafe_allow_html=True)
+    # Add footer in the sidebar
+    st.sidebar.markdown('<p class="footer">The Model is developed and designed by <span class="branding">Mohammed Farooq Basha S</span></p>', unsafe_allow_html=True)
 
 # Run the app
 if __name__ == '__main__':
     main()
-
