@@ -84,13 +84,13 @@ def main():
     st.sidebar.markdown('<p class="sidebar-header">Check out my</p>', unsafe_allow_html=True)
     st.sidebar.markdown('[LinkedIn Profile](https://www.linkedin.com/farooq-basha)', unsafe_allow_html=True)
     # App description and instructions
-    st.sidebar.markdown('<p class="sidebar-header">About the App</p>', unsafe_allow_html=True)
-    st.sidebar.markdown('This app predicts whether a customer is likely to subscribe to insurance based on their information.')
+    st.markdown('<p class="sidebar-header">About the App</p>', unsafe_allow_html=True)
+    st.markdown('This app predicts whether a customer is likely to subscribe to insurance based on their information.')
 
-    st.sidebar.markdown('<p class="sidebar-header">Instructions</p>', unsafe_allow_html=True)
-    st.sidebar.markdown('1. Use the dropdowns and sliders to enter the customer details.')
-    st.sidebar.markdown('2. Click on the "Predict" button to see the prediction result.')
-    st.sidebar.markdown('3. The prediction will appear below the "Prediction" section in green or red text.')
+    st.markdown('<p class="sidebar-header">Instructions</p>', unsafe_allow_html=True)
+    st.markdown('1. Use the dropdowns and sliders to enter the customer details.')
+    st.markdown('2. Click on the "Predict" button to see the prediction result.')
+    st.markdown('3. The prediction will appear below the "Prediction" section in green or red text.')
 
 
     # Read the dataset
