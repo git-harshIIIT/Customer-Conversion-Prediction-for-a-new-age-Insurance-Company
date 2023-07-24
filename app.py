@@ -21,11 +21,11 @@ st.markdown(
     .header {
         background-color: #33adff;
         color: white;
-        padding: 0.8rem;
+        padding: 0.4rem;
         text-align: center;
-        font-size: 2.5rem;
-        border-radius: 0.5rem;
-        margin-bottom: 1.5rem;
+        font-size: 1.75rem;
+        border-radius: 0.25rem;
+        margin-bottom: .75rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     .button {
@@ -43,7 +43,7 @@ st.markdown(
         font-weight: bold;
         margin-top: 1.5rem;
         text-align: center;
-        
+
     }
     .footer {
         text-align: center;
@@ -52,7 +52,7 @@ st.markdown(
         font-size: 1rem;
         font-weight: bold;
     }
-    
+
     .sidebar-content {
         padding: 2rem;
     }
@@ -83,6 +83,15 @@ def main():
     st.sidebar.title('Navigation')
     st.sidebar.markdown('<p class="sidebar-header">Check out my</p>', unsafe_allow_html=True)
     st.sidebar.markdown('[LinkedIn Profile](https://www.linkedin.com/farooq-basha)', unsafe_allow_html=True)
+    # App description and instructions
+    st.sidebar.markdown('<p class="sidebar-header">About the App</p>', unsafe_allow_html=True)
+    st.sidebar.markdown('This app predicts whether a customer is likely to subscribe to insurance based on their information.')
+
+    st.sidebar.markdown('<p class="sidebar-header">Instructions</p>', unsafe_allow_html=True)
+    st.sidebar.markdown('1. Use the dropdowns and sliders to enter the customer details.')
+    st.sidebar.markdown('2. Click on the "Predict" button to see the prediction result.')
+    st.sidebar.markdown('3. The prediction will appear below the "Prediction" section in green or red text.')
+
 
     # Read the dataset
     dataset = pd.read_csv('train.csv')
@@ -106,9 +115,9 @@ def main():
     # Inverse transform function to map numeric values back to job names
     def inverse_transform_job(code):
         return le.inverse_transform([code])[0]
-        
+
     # Get user inputs for features
- 
+
     col1, col2, col3 = st.columns(3)
     with col1:
         job = st.selectbox('Job', dataset['job'].unique(), format_func=inverse_transform_job)
