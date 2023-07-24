@@ -79,6 +79,12 @@ st.markdown(
 def main():
     st.title('Customer Insurance Subscription Prediction')
 
+    # Load the image from the same GitHub repository where app.py is located
+    image_path = 'mlcus.jpg'
+    image = st.image(image_path, use_column_width=True)
+
+
+
     # Sidebar menu
     st.sidebar.title('Navigation')
     st.sidebar.markdown('<p class="sidebar-header">Check out my</p>', unsafe_allow_html=True)
