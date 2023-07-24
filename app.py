@@ -43,16 +43,11 @@ st.markdown(
         font-weight: bold;
         margin-top: 1.5rem;
         text-align: center;
-
-    }
-    .footer {
-        text-align: center;
     }
     .branding {
         font-size: 1rem;
         font-weight: bold;
     }
-
     .sidebar-content {
         padding: 2rem;
     }
@@ -70,6 +65,13 @@ st.markdown(
     .sidebar-link:hover {
         text-decoration: underline;
     }
+    .cover-image {
+        max-width: 75%;
+        margin: 0 auto;
+        display: block;
+        border-radius: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -79,11 +81,14 @@ st.markdown(
 def main():
     st.title('Customer Insurance Subscription Prediction')
 
-
     # Sidebar menu
-    st.sidebar.title('Navigation')
-    st.sidebar.markdown('<p class="sidebar-header">Check out my</p>', unsafe_allow_html=True)
+    st.sidebar.title('About the App Developer')
+    st.sidebar.markdown('<p class="branding">Mohammed Farooq basha S</p>', unsafe_allow_html=True)
+    st.sidebar.markdown('<p class="branding">Contact Information:</p>', unsafe_allow_html=True)
     st.sidebar.markdown('[LinkedIn Profile](https://www.linkedin.com/farooq-basha)', unsafe_allow_html=True)
+    st.sidebar.markdown('GitHub Account: [Farooqbasha008](https://github.com/Farooqbasha008)')
+    st.sidebar.markdown('Email: sfarooq8.fb@gmail.com')
+
     # App description and instructions
     st.markdown('<p class="sidebar-header">About the App</p>', unsafe_allow_html=True)
     st.markdown('This app predicts whether a customer is likely to subscribe to insurance based on their information.')
@@ -166,9 +171,6 @@ def main():
             st.markdown('<p class="prediction" style="color: red;">No, The customer is highly unlikely to subscribe to the insurance.</p>', unsafe_allow_html=True)
         else:
             st.markdown('<p class="prediction" style="color: green;">Yes, The customer is highly likely to subscribe to the insurance.</p>', unsafe_allow_html=True)
-
-    # Add footer in the sidebar
-    st.sidebar.markdown('<p class="footer">The Model is developed and designed by <span class="branding">Mohammed Farooq Basha S</span></p>', unsafe_allow_html=True)
 
 # Run the app
 if __name__ == '__main__':
