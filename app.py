@@ -1,4 +1,7 @@
 import streamlit as st
+import pandas as pd
+import joblib
+from sklearn.preprocessing import LabelEncoder
 
 # Load the trained model
 model = joblib.load('model.pkl')
@@ -40,6 +43,7 @@ st.markdown(
         font-weight: bold;
         margin-top: 1.5rem;
         text-align: center;
+
     }
     .footer {
         text-align: center;
@@ -47,14 +51,6 @@ st.markdown(
     .branding {
         font-size: 1rem;
         font-weight: bold;
-    }
-
-    .cover-image {
-        max-width: 75%;
-        margin: 0 auto;
-        display: block;
-        border-radius: 1rem;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
 
     .sidebar-content {
@@ -83,9 +79,6 @@ st.markdown(
 def main():
     st.title('Customer Insurance Subscription Prediction')
 
-    # Load the image from the same GitHub repository where app.py is located
-    image_path = 'mlcus.jpg'
-    image = st.image(image_path, use_column_width=True, caption='')
 
     # Sidebar menu
     st.sidebar.title('Navigation')
